@@ -1,10 +1,33 @@
 #!/usr/bin/env python3
 
-
+import csv
 from netmiko import ConnectHandler
 
+def get_devices_from_file(device_file):
+    # This function takes a CSV file with inventory and creates a python list of dictionaries out of it
+    # Each dictionary contains information about a single device
 
-def get_config(conf_name):
+    # creating empty structures
+    device_list = list()
+    #device = dict()
+
+    # reading a CSV file with ',' as a delimiter
+    with open(device_file, 'r') as f:
+        reader = csv.DictReader(f, delimiter=',')
+
+        # every device represented by single row which is a dictionary object with keys equal to column names.
+        for row in reader:
+            device_list.append(row)
+
+    print("Got the device list from inventory")
+    print('-*-' * 10)
+    print()
+
+    # returning a list of dictionaries
+    return device_list
+
+
+def load_config(conf_name):
     
     ignore = ["duplex", "alias", "configuration", "version"]
     commands = []
@@ -18,23 +41,25 @@ def get_config(conf_name):
     
     return commands
 
+def device_connect(device, config):
+    net_connect = ConnectHandler(
+        host=device["ip"],
+        port=device["port"],
+        username=device["username"],
+        password=device["password"],
+        device_type=device["device_type"],
+        secret=device["secret"])
+    net_connect.find_prompt()
+    net_connect.enable("enable")
+    net_connect.config_mode("configure terminal")
+    output = net_connect.send_config_set(load_config(config))
+    net_connect.disconnect()
+    return output
 
-device_dict = {
-"ip" : "10.0.0.64",
-"port" : "32784",
-"username" : "cisco",
-"password" : "cisco",
-"secret" : "cisco",
-"device_type" : "cisco_ios_telnet",
-}
 
-commands = ["hostname RviOS", "cdp run"]
-
-net_connect = ConnectHandler(**device_dict)
-net_connect.find_prompt()
-net_connect.enable("enable")
-net_connect.config_mode("configure terminal")
-output = net_connect.send_config_set(get_config())
-
-print(output)
-net_connect.disconnect()
+for device in get_devices_from_file("devices.csv"):
+    print(device)
+    configuration = load_config(device["conf_name"])
+    print(configuration)
+    print(device_connect(device, configuration))
+   
