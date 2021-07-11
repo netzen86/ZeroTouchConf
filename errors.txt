@@ -1,0 +1,107 @@
+Первый коннект к роуру vIOS без настроек
+
+Configuration ['hostname R47-TEST47', 'snmp-server location Surgut47']
+Traceback (most recent call last):
+  File "./ztceve.py", line 70, in <module>
+    print(device_connect(device, configuration))
+  File "./ztceve.py", line 56, in device_connect
+    secret=device["secret"])
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 925, in establish_connection
+    self.telnet_login()
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/cisco_base_connection.py", line 185, in telnet_login
+    raise NetmikoAuthenticationException(msg)
+netmiko.ssh_exception.NetmikoAuthenticationException: Login failed: 10.0.0.64
+
+Второй коннект к роутеру vIOS без настроек
+
+21:36 $ ./ztceve.py 
+Got the device list from inventory
+-*--*--*--*--*--*--*--*--*--*-
+
+Configuration ['hostname R46-test66', 'snmp-server location Surgut']
+Traceback (most recent call last):
+  File "./ztceve.py", line 70, in <module>
+    print(device_connect(device, configuration))
+  File "./ztceve.py", line 56, in device_connect
+    secret=device["secret"])
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 356, in _open
+    self._try_session_preparation()
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 792, in _try_session_preparation
+    self.session_preparation()
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/cisco/cisco_ios.py", line 24, in session_preparation
+    self.set_base_prompt()
+  File "/usr/local/lib/python3.7/dist-packages/tenacity/__init__.py", line 339, in wrapped_f
+    return self(f, *args, **kw)
+  File "/usr/local/lib/python3.7/dist-packages/tenacity/__init__.py", line 430, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "/usr/local/lib/python3.7/dist-packages/tenacity/__init__.py", line 378, in iter
+    raise retry_exc.reraise()
+  File "/usr/local/lib/python3.7/dist-packages/tenacity/__init__.py", line 206, in reraise
+    raise self.last_attempt.result()
+  File "/usr/lib/python3.7/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/lib/python3.7/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.7/dist-packages/tenacity/__init__.py", line 433, in __call__
+    result = fn(*args, **kwargs)
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 1166, in set_base_prompt
+    raise ValueError(f"Router prompt not found: {repr(prompt)}")
+ValueError: Router prompt not found: 'R'
+
+Первый коннект к роуру на vIOS
+
+
+Configuration ['hostname R47-TEST47', 'snmp-server location Surgut47']
+Traceback (most recent call last):
+  File "./ztceve.py", line 70, in <module>
+    print(device_connect(device, configuration))
+  File "./ztceve.py", line 56, in device_connect
+    secret=device["secret"])
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/cisco/cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 350, in __init__
+    self._open()
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 356, in _open
+    self._try_session_preparation()
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 792, in _try_session_preparation
+    self.session_preparation()
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/cisco/cisco_ios.py", line 24, in session_preparation
+    self.set_base_prompt()
+  File "/usr/local/lib/python3.7/dist-packages/tenacity/__init__.py", line 339, in wrapped_f
+    return self(f, *args, **kw)
+  File "/usr/local/lib/python3.7/dist-packages/tenacity/__init__.py", line 430, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "/usr/local/lib/python3.7/dist-packages/tenacity/__init__.py", line 378, in iter
+    raise retry_exc.reraise()
+  File "/usr/local/lib/python3.7/dist-packages/tenacity/__init__.py", line 206, in reraise
+    raise self.last_attempt.result()
+  File "/usr/lib/python3.7/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/lib/python3.7/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.7/dist-packages/tenacity/__init__.py", line 433, in __call__
+    result = fn(*args, **kwargs)
+  File "/usr/local/lib/python3.7/dist-packages/netmiko/base_connection.py", line 1166, in set_base_prompt
+    raise ValueError(f"Router prompt not found: {repr(prompt)}")
+ValueError: Router prompt not found: 'Route'
+
+Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M), Version 15.7(3)M3, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2018 by Cisco Systems, Inc.
+Compiled Wed 01-Aug-18 16:45 by prod_rel_team
