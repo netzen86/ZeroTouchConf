@@ -1,3 +1,4 @@
 conf_name,ip,port,username,password,secret,device_type
-./cfg/R44,10.0.0.64,32784,cisco,cisco,cisco,cisco_ios_telnet
-./cfg/R45,10.0.0.64,32785,cisco,cisco,cisco,cisco_ios_telnet
+./cfg/R46,10.0.0.64,32780,cisco,cisco,cisco,cisco_ios_telnet
+./cfg/RR,10.0.0.64,32784,cisco,cisco,cisco,cisco_ios_telnet
+./cfg/R47,10.0.0.64,32769,cisco,cisco,cisco,cisco_ios_telnet

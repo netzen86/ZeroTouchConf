@@ -1,2 +1,2 @@
-hostname R44
-snmp-server location LocationOneR44
+hostname R44-test1
+snmp-server location TEST44

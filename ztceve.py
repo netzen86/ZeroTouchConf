@@ -37,11 +37,16 @@ def load_config(conf_name):
             words = line.split()
             words_intersect = set(words) & set(ignore)
             if not line.startswith("!") and not words_intersect:
-                commands.append(line.strip())
+                if "interface" in line:
+                    commands.append(line.strip())
+                    commands.append("no shut")
+                else:
+                    commands.append(line.strip())
     
     return commands
 
 def device_connect(device, config):
+    #print(config)
     net_connect = ConnectHandler(
         host=device["ip"],
         port=device["port"],
@@ -49,17 +54,18 @@ def device_connect(device, config):
         password=device["password"],
         device_type=device["device_type"],
         secret=device["secret"])
-    net_connect.find_prompt()
+    net_connect.find_prompt(delay_factor=20)
+    #net_connect.send_command('\n', expect_string=r'.*>')
     net_connect.enable("enable")
     net_connect.config_mode("configure terminal")
-    output = net_connect.send_config_set(load_config(config))
+    output = net_connect.send_config_set(config)
     net_connect.disconnect()
     return output
 
 
 for device in get_devices_from_file("devices.csv"):
-    print(device)
+    #print(f"Device {device}")
     configuration = load_config(device["conf_name"])
-    print(configuration)
+    print(f"Configuration {configuration}")
     print(device_connect(device, configuration))
    
