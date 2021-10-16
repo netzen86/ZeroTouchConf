@@ -1,0 +1,23 @@
+hostname SW1
+
+aaa new-model
+!
+no ip domain lookup
+ip domain name pyneng
+!
+crypto key generate rsa modulus 1024
+ip ssh version 2
+!
+username cisco password cisco
+enable secret cisco
+!
+line vty 0 4
+ logging synchronous
+ login local
+ transport input telnet ssh
+
+int vlan 1
+no shut
+ip address 192.168.100.4 255.255.255.0
+
+ip default gateway 192.168.100.1

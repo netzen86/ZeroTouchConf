@@ -1,0 +1,27 @@
+hostname R1
+
+aaa new-model
+!
+no ip domain lookup
+ip domain name pyneng
+!
+crypto key generate rsa modulus 1024
+ip ssh version 2
+!
+username cisco password cisco
+enable secret cisco
+!
+line vty 0 4
+ logging synchronous
+ login local
+ transport input telnet ssh
+
+interface GigabitEthernet0/1
+no shut
+ip add dhcp
+
+interface GigabitEthernet0/0
+no shut
+ip address 192.168.100.1 255.255.255.0
+
+ip route 0.0.0.0 0.0.0.0 10.0.0.254
